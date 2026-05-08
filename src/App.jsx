@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 const IMGS = {
-  onboard1: "https://i.postimg.cc/yx8qY4wQ/IMG-6448",
+  onboard1: "https://res.cloudinary.com/dxbapgxie/image/upload/v1778274730/IMG_6448_lrcdht.png",
   onboard2: "https://i.postimg.cc/9fwZKD0w/BAAC20ED",
   onboard3: "https://i.postimg.cc/26Vk2W5k/IMG-5847",
   dia:        "https://i.postimg.cc/NjMzykJ3/0DB2359B",
