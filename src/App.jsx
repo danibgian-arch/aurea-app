@@ -14,18 +14,18 @@ import {
 } from "lucide-react";
 
 const IMGS = {
-  onboard1: "https://i.postimg.cc/yx8qY4wQ/IMG-6448",
-  onboard2: "https://i.postimg.cc/9fwZKD0w/BAAC20ED",
-  onboard3: "https://i.postimg.cc/26Vk2W5k/IMG-5847",
-  dia:        "https://i.postimg.cc/NjMzykJ3/0DB2359B",
-  trabalho:   "https://i.postimg.cc/YC9s4zDw/1F0E823B",
-  almoco:     "https://i.postimg.cc/wjvGtQfF/69991894",
-  evento:     "https://i.postimg.cc/wjvGtQfF/69991894",
-  viagem:     "https://i.postimg.cc/SxsvXfTd/6885C94C",
-  fimdesemana:"https://i.postimg.cc/8PwYP0H9/7F3BFDD2",
-  academia:   "https://i.postimg.cc/qvR5txb9/8D64E9FD",
-  emcasa:     "https://i.postimg.cc/Cx1QZsPP/AC41A15C",
-  jantar:     "https://images.unsplash.com/photo-1571513722275-4b41940f54b8?w=700&q=85",
+  onboard1: "https://res.cloudinary.com/dxbapgxie/image/upload/v1778274730/IMG_6448_lrcdht.png",
+  onboard2: "https://res.cloudinary.com/dxbapgxie/image/upload/v1778265199/BAAC20ED-5D2F-44C4-8550-E2410A574D47_c33cya.png",
+  onboard3: "https://res.cloudinary.com/dxbapgxie/image/upload/v1778265200/IMG_5847_edqtia.png",
+  dia:        "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/5DA4F1F9-A657-4C08-A726-5AC6D7BAFA0F_wcdtim.png",
+  trabalho:   "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268567/ECE8A2EF-191B-4A79-8210-884268CB86C6_hywijd.png",
+  almoco:     "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/4565CC99-C3C5-49C9-9221-552A7C199AE0_uotq7k.png",
+  evento:     "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/4565CC99-C3C5-49C9-9221-552A7C199AE0_uotq7k.png",
+  viagem:     "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/4565CC99-C3C5-49C9-9221-552A7C199AE0_uotq7k.png",
+  fimdesemana:"https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/4565CC99-C3C5-49C9-9221-552A7C199AE0_uotq7k.png",
+  academia:   "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268567/DEA4322F-F3D4-4C86-A56F-9F7421D44DC6_i4j24z.png",
+  emcasa:     "https://res.cloudinary.com/dxbapgxie/image/upload/v1778268568/9FA03988-B00B-4F9D-84B6-2C1EF0CABCC8_ekavj7.png",
+  jantar:     "https://res.cloudinary.com/dxbapgxie/image/upload/v1778269379/95b80f7a-8a36-4491-867f-b40525d64a84_herjki.png",
 };
 
 const QUICK_LOOKS = {
@@ -779,8 +779,8 @@ export default function Aurea() {
       <img src={IMGS.onboard1} className="img-full" alt="" style={{objectPosition:"center center"}}/>
       <div className="pad" style={{paddingTop:26}}>
         <div className="logo" style={{marginBottom:18}}>ÁUREA</div>
-        <h1 style={{fontSize:32,lineHeight:1.2,marginBottom:12}}>A roupa certa.<br/><em>Na hora certa.</em></h1>
-        <p style={{marginBottom:10}}>Em menos de 1 minuto, seu look resolvido.</p>
+        <h1 style={{fontSize:30,lineHeight:1.2,marginBottom:12}}>Já ficou parada em frente ao seu closet sem saber o que vestir?</h1>
+        <p style={{marginBottom:10,fontSize:14}}>A roupa certa. Na hora certa.</p>
         <p style={{fontSize:12,fontWeight:300,color:"var(--caramel)",letterSpacing:".06em",fontStyle:"italic"}}>Já viu na Áurea?</p>
       </div>
       <div className="spacer"/>
@@ -803,7 +803,7 @@ export default function Aurea() {
         <p style={{color:"rgba(250,248,244,.8)",fontSize:15,fontWeight:300,lineHeight:1.65,marginBottom:32}}>
           A Áurea entende seu momento e sugere combinações que realmente funcionam pra você.
         </p>
-        <button className="bp" onClick={()=>go(2)}
+        <button className="bp" onClick={()=>go(3)}
           style={{background:"rgba(250,248,244,.95)",color:"var(--ink)"}}>
           Continuar
         </button>
@@ -1703,13 +1703,13 @@ export default function Aurea() {
       <div className="pad" style={{paddingTop:22}}>
         <div className="eyebrow">Dia a dia</div>
         <h2>Como está seu dia hoje?</h2>
-        <p style={{marginBottom:24}}>Pra eu ajustar o look pra você.</p>
+        <p style={{marginBottom:24}}>Escolha a proposta que mais combina com seu momento.</p>
         <div className="stack">
-          {[{id:"correria",Icon:Zap,title:"Correria do dia",desc:"Versátil e confortável",detail:"Levar os filhos, mercado, médico, rotina intensa"},{id:"equilibrado",Icon:Compass,title:"Dia equilibrado",desc:"Arrumada sem esforço",detail:"Rotina normal, compromissos leves"},{id:"arrumado",Icon:Sparkles,title:"Mais arrumado",desc:"Um pouco mais produzida",detail:"Quando quer se sentir mais bonita no dia a dia"}].map(o=>(
+          {[{id:"correria",Icon:Zap,title:"Correria do dia",desc:"Prática, confortável e pronta para tudo"},{id:"equilibrado",Icon:Compass,title:"Equilibrado",desc:"Arrumada na medida certa"},{id:"arrumado",Icon:Sparkles,title:"Mais produzido",desc:"Quando você quer se sentir ainda mais bonita"}].map(o=>(
             <div key={o.id} className={`fc${diaSubtype===o.id?" on":""}`} onClick={()=>setDiaSubtype(o.id)}>
               <div style={{display:"flex",gap:14,alignItems:"flex-start",flex:1}}>
                 <div style={{width:44,height:44,borderRadius:"50%",flexShrink:0,border:"1.5px solid var(--mist)",display:"flex",alignItems:"center",justifyContent:"center",background:"var(--cream)",color:"var(--caramel)"}}><o.Icon size={18} strokeWidth={1.5}/></div>
-                <div><span style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:500,color:"var(--ink)",display:"block",marginBottom:3}}>{o.title}</span><span style={{fontSize:13,fontWeight:400,color:"var(--caramel)",display:"block",marginBottom:3}}>{o.desc}</span><span style={{fontSize:12,fontWeight:300,color:"#9a8878",display:"block",lineHeight:1.5}}>{o.detail}</span></div>
+                <div><span style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:500,color:"var(--ink)",display:"block",marginBottom:3}}>{o.title}</span><span style={{fontSize:13,fontWeight:400,color:"var(--caramel)",display:"block"}}>{o.desc}</span></div>
               </div>
               {diaSubtype===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0,marginLeft:8}}/>}
             </div>
