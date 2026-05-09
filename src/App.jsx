@@ -813,7 +813,7 @@ export default function Aurea() {
 
     // 2 — Onboard 3
     <div key="2" className="scroll-pb">
-      <      <img src={IMGS.onboard3} className="img-half" alt="" style={{objectPosition:"center center"}} />
+            <img src={IMGS.onboard3} className="img-half" alt="" style={{objectPosition:"center center"}} />
       <div className="pad" style={{paddingTop:26}}>
         <div className="logo" style={{marginBottom:18}}>ÁUREA</div>
         <h1 style={{marginBottom:16}}>Você já tem<br/><em>muita coisa boa.</em></h1>
