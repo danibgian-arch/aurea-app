@@ -790,7 +790,7 @@ export default function Aurea() {
     // 1 — Onboard 2
     <div key="1" style={{position:"relative",minHeight:"100dvh",display:"flex",flexDirection:"column"}}>
       {/* Foto em tela cheia */}
-      <img src={IMGS.onboard2} alt=""
+      <img src={IMGS.onboard2} alt="" 
         style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center",display:"block"}}/>
       {/* Gradiente inferior */}
       <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 35%,rgba(28,23,20,.75) 65%,rgba(28,23,20,.92) 100%)"}}/>
