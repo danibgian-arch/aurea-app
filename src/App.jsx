@@ -790,7 +790,7 @@ export default function Aurea() {
     // 1 — Onboard 2
     <div key="1" style={{position:"relative",minHeight:"100dvh",display:"flex",flexDirection:"column"}}>
       {/* Foto em tela cheia */}
-      <img src="https://i.postimg.cc/9fwZKD0w/BAAC20ED" alt=""
+      <img src={IMGS.onboard2} alt=""
         style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center",display:"block"}}/>
       {/* Gradiente inferior */}
       <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 35%,rgba(28,23,20,.75) 65%,rgba(28,23,20,.92) 100%)"}}/>
@@ -813,7 +813,7 @@ export default function Aurea() {
 
     // 2 — Onboard 3
     <div key="2" className="scroll-pb">
-      <img src="https://i.postimg.cc/26Vk2W5k/IMG-5847" className="img-half" alt="" style={{objectPosition:"center center"}}/>
+      <<img src={IMGS.onboard3} className="img-half" alt="" style={{objectPosition:"center center"}}/>
       <div className="pad" style={{paddingTop:26}}>
         <div className="logo" style={{marginBottom:18}}>ÁUREA</div>
         <h1 style={{marginBottom:16}}>Você já tem<br/><em>muita coisa boa.</em></h1>
