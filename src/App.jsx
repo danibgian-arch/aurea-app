@@ -78,12 +78,12 @@ const MOMENTS = [
 
 const OCCASION_SUBTYPES = {
   dia: { q:"Como você gosta de se vestir no dia a dia?", opts:[{id:"basica",label:"Mais básica",sub:"Looks simples e fáceis"},{id:"arrumada",label:"Bem arrumada",sub:"Visual mais alinhado"},{id:"fashion",label:"Mais fashion",sub:"Looks com mais personalidade"},{id:"confortavel",label:"Confortável e estilosa",sub:"Bem-estar sem perder o estilo"}] },
-  trabalho: { q:"Como é o seu ambiente de trabalho?", opts:[{id:"formal",label:"Mais formal",sub:"Imagem mais alinhada"},{id:"equilibrado",label:"Equilibrado",sub:"Arrumada sem exagero"},{id:"tranquilo",label:"Tranquilo",sub:"Confortável com estilo"},{id:"criativo",label:"Mais criativo",sub:"Looks com personalidade"}] },
-  almoco: { q:"Qual é a proposta do almoço?", opts:[{id:"casualchic",label:"Casual chic",sub:"Arrumada sem parecer demais"},{id:"arrumada",label:"Bem arrumada",sub:"Visual alinhado e feminino"},{id:"fashion",label:"Mais fashion",sub:"Look com mais presença"},{id:"leve",label:"Leve e confortável",sub:"Bonita, leve e sem esforço"}] },
-  jantar: { q:"Qual é a proposta da noite?", opts:[{id:"casualchic",label:"Casual chic",sub:"Leve, chic e natural"},{id:"elegante",label:"Mais elegante",sub:"Um visual mais refinado"},{id:"fashion",label:"Mais atual",sub:"Mais tendência, sem exageros"},{id:"confortavel",label:"Confortável",sub:"Bonita e confortável ao mesmo tempo"}] },
-  fimdesemana: { q:"Como você quer viver o final de semana?", opts:[{id:"leve",label:"Leve e prática",sub:"Fácil para passear"},{id:"arrumada",label:"Bem arrumada",sub:"Alinhada mesmo no fim de semana"},{id:"fashion",label:"Mais fashion",sub:"Look com personalidade"},{id:"confortavel",label:"Confortável e estilosa",sub:"Relaxada, mas com estilo"}] },
-  academia: { q:"Como você quer se vestir para treinar?", opts:[{id:"funcional",label:"Básico funcional",sub:"Prático e direto"},{id:"sportychic",label:"Esportivo chic",sub:"Treino com visual alinhado"},{id:"fashion",label:"Mais fashion",sub:"Fitness com estilo"},{id:"confortavel",label:"Confortável total",sub:"Prioridade para o movimento"}] },
-  emcasa: { q:"Como você quer ficar em casa?", opts:[{id:"confortavel",label:"Confortável",sub:"Para descansar sem pensar"},{id:"arrumadinha",label:"Arrumadinha",sub:"Confortável com cuidado"},{id:"homeoffice",label:"Home office",sub:"Prática e apresentável"},{id:"cozychic",label:"Cozy chic",sub:"Conforto sofisticado"}] },
+  trabalho: { q:"Como é o seu ambiente de trabalho?", opts:[{id:"formal",label:"Mais formal",sub:"Imagem mais alinhada"},{id:"equilibrado",label:"Refinado",sub:"Elegante na medida certa"},{id:"tranquilo",label:"Casual alinhado",sub:"Confortável sem perder presença"},{id:"criativo",label:"Mais criativo",sub:"Looks com mais personalidade"}] },
+  almoco: { q:"Qual é a proposta do almoço?", opts:[{id:"casualchic",label:"Casual chic",sub:"Elegante de forma natural"},{id:"arrumada",label:"Feminina e alinhada",sub:"Mais presença, sem exagero"},{id:"fashion",label:"Fashion atual",sub:"Mais personalidade no look"},{id:"leve",label:"Leve e confortável",sub:"Bonita de um jeito descomplicado"}] },
+  jantar: { q:"Como você quer se sentir?", opts:[{id:"casualchic",label:"Casual chic",sub:"Leve, elegante e natural"},{id:"elegante",label:"Mais elegante",sub:"Visual mais refinado"},{id:"fashion",label:"Mais atual",sub:"Mais tendência, sem exageros"},{id:"confortavel",label:"Confortável chic",sub:"Elegante sem abrir mão do conforto"}] },
+  fimdesemana: { q:"Como você quer viver o final de semana?", opts:[{id:"leve",label:"Casual chic",sub:"Leve, bonita e fácil de usar"},{id:"arrumada",label:"Mais arrumada",sub:"Um visual mais alinhado e feminino"},{id:"fashion",label:"Mais atual",sub:"Com informação de moda na medida certa"},{id:"confortavel",label:"Relax confortável",sub:"Conforto sem perder o estilo"}] },
+  academia: { q:"Como você quer se sentir no treino?", opts:[{id:"funcional",label:"Clean esportiva",sub:"Visual leve e minimalista"},{id:"sportychic",label:"Esportivo chic",sub:"Treino com visual alinhado"},{id:"fashion",label:"Mais atual",sub:"Fitness com informação de moda"},{id:"confortavel",label:"Conforto absoluto",sub:"Liberdade total para o movimento"}] },
+  emcasa: { q:"Como você quer se sentir em casa?", opts:[{id:"confortavel",label:"Conforto total",sub:"Leve, prática e relaxada"},{id:"arrumadinha",label:"Arrumada na medida",sub:"Confortável, mas com presença"},{id:"homeoffice",label:"Receber em casa",sub:"Bonita sem parecer produzida"},{id:"cozychic",label:"Cozy chic",sub:"Conforto com estética sofisticada"}] },
   viagem_look: { q:"Como você quer viajar?", opts:[{id:"leve",label:"Leve e confortável",sub:"Tranquila e bem o dia todo"},{id:"arrumada",label:"Bem arrumada",sub:"Confortável com visual alinhado"},{id:"sofisticada",label:"Mais sofisticada",sub:"Elegante em trânsito"}] },
 };
 
@@ -586,11 +586,13 @@ export default function Aurea() {
   const [prev,setPrev]=useState(null);
   const [name,setName]=useState("");
   const [moment,setMoment]=useState(null);
+  const [jantarContext,setJantarContext]=useState(null);
   const [cityInput,setCityInput]=useState("");
   const [cityOk,setCityOk]=useState(false);
   const [cityErr,setCityErr]=useState(false);
   const [citySuggs,setCitySuggs]=useState([]);
   const [dateMode,setDateMode]=useState(null);
+  const [dateChoice,setDateChoice]=useState(null);
   const [customDate,setCustomDate]=useState("");
   const [showCal,setShowCal]=useState(false);
   const [travelStart,setTravelStart]=useState("");
@@ -627,6 +629,7 @@ export default function Aurea() {
   const [quickTone,setQuickTone]=useState(null);
   const [quickLookIdx,setQuickLookIdx]=useState(0);
   const [occasionSubtype,setOccasionSubtype]=useState(null);
+  const [lookIntensity,setLookIntensity]=useState(1); // 0=leve, 1=equilibrado, 2=presença
   const [lookVariantIdx,setLookVariantIdx]=useState(0);
   const [dislikedLooks,setDislikedLooks]=useState([]);
   const [editorialTitleIdx,setEditorialTitleIdx]=useState(0);
@@ -635,14 +638,36 @@ export default function Aurea() {
   const [closetMemory,setClosetMemory]=useState({pieces:{},tones:{},occasions:{},interactions:0});
   const [premiumInterest,setPremiumInterest]=useState(false);
 
-  const BACK={1:0,2:1,3:2,4:3,18:4,5:4,6:5,7:6,25:6,26:25,27:26,8:7,10:8,19:10,21:10,28:13,29:28,30:6};
+  // Mapa de navegação: cada tela sabe de onde veio
+  const BACK={
+    // Onboarding
+    1:0, 2:1, 3:2,
+    // Fluxo principal
+    4:3,   // Momentos ← Nome
+    18:4,  // Dia subtype ← Momentos
+    5:4,   // Cidade ← Momentos (demais ocasiões)
+    6:5,   // Data ← Cidade
+    7:6,   // Clima ← Data
+    22:7,  // Contexto jantar ← Clima
+    8:moment==="jantar"?22:7,  // Filtro ← Contexto jantar ou Clima
+    23:8,  // Transição ← Filtro
+    10:23, // Look ← Transição
+    // Dia a dia
+    19:18, // Onde e quando ← Mood dia
+    // Resultado
+    21:10,
+    // Hub e abas
+    28:13, 29:28,
+    // Viagem
+    30:6,  31:30, 25:31, 26:25, 27:26,
+  };
   const NAV_SCREENS=[13,14,15,16,17];
   const showNav=NAV_SCREENS.includes(screen);
   const isViagem=moment==="viagem";
 
   const go=(n)=>{
-    if(n<=4||n===18){setOwnedPieces({});setActiveLook(null);setExtraVariations([]);setOccasionSubtype(null);setLookVariantIdx(0);}
-    if(n===10){
+    if(n<=4||n===18){setOwnedPieces({});setActiveLook(null);setExtraVariations([]);setOccasionSubtype(null);setLookVariantIdx(0);setLookIntensity(1);}
+    if(n===10||n===23){
       setEditorialTitleIdx(Math.floor(Math.random()*EDITORIAL_TITLES.length));
       setAureaContextText(getAureaContext(moment||"dia"));
       setAureaComentarioText("");
@@ -774,89 +799,89 @@ export default function Aurea() {
 
   const screens = [
 
-    // 0 — Onboard 1
-    <div key="0">
-      <img src={IMGS.onboard1} className="img-full" alt="" style={{objectPosition:"center center"}}/>
-      <div className="pad" style={{paddingTop:26}}>
-        <div className="logo" style={{marginBottom:18}}>ÁUREA</div>
-        <h1 style={{fontSize:30,lineHeight:1.2,marginBottom:12}}>Já ficou parada em frente ao seu closet sem saber o que vestir?</h1>
-        <p style={{marginBottom:10,fontSize:14}}>A roupa certa. Na hora certa.</p>
-        <p style={{fontSize:12,fontWeight:300,color:"var(--caramel)",letterSpacing:".06em",fontStyle:"italic"}}>Já viu na Áurea?</p>
+    // 0 — Onboard 1 — A DOR
+    <div key="0" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",background:"var(--cream)"}}>
+      <img src={IMGS.onboard1} alt="" style={{width:"100%",height:"55vh",objectFit:"cover",objectPosition:"center top",display:"block",flexShrink:0}}/>
+      <div style={{flex:1,display:"flex",flexDirection:"column",padding:"32px 28px 0"}}>
+        <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:24}}>ÁUREA</div>
+        <h1 style={{fontFamily:"var(--serif)",fontSize:28,lineHeight:1.3,fontWeight:300,color:"var(--ink)",marginBottom:18}}>Já ficou parada em frente ao seu closet sem saber o que vestir?</h1>
+        <p style={{fontSize:15,fontWeight:400,color:"var(--ink)",lineHeight:1.6,marginBottom:8}}>A Áurea resolve o look pra você.</p>
+        <p style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.6,marginBottom:0}}>Menos indecisão. Mais combinações que funcionam.</p>
       </div>
-      <div className="spacer"/>
-      <div style={{padding:"0 28px 48px"}}><button className="bp" onClick={()=>go(1)}>Começar</button></div>
+      <div style={{padding:"28px 28px 48px"}}><button className="bp" onClick={()=>go(1)}>Continuar</button></div>
     </div>,
 
-    // 1 — Onboard 2
+    // 1 — Onboard 2 — A SOLUÇÃO
     <div key="1" style={{position:"relative",minHeight:"100dvh",display:"flex",flexDirection:"column"}}>
-      {/* Foto em tela cheia */}
-      <img src={IMGS.onboard2} alt="" 
-        style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center",display:"block"}}/>
-      {/* Gradiente inferior */}
-      <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 35%,rgba(28,23,20,.75) 65%,rgba(28,23,20,.92) 100%)"}}/>
-      {/* Conteúdo sobre a foto */}
+      <img src={IMGS.onboard2} alt=""
+        style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center"}}/>
+      <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(20,16,12,.15) 0%,rgba(20,16,12,.5) 45%,rgba(20,16,12,.88) 75%,rgba(20,16,12,.96) 100%)"}}/>
       <div style={{position:"relative",zIndex:2,marginTop:"auto",padding:"0 28px 48px"}}>
-        <div style={{fontFamily:"var(--serif)",fontSize:11,fontWeight:400,letterSpacing:".22em",textTransform:"uppercase",color:"rgba(250,248,244,.75)",marginBottom:20}}>ÁUREA</div>
-        <h1 style={{color:"white",fontSize:38,lineHeight:1.15,marginBottom:16,fontWeight:300}}>
+        <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"rgba(250,248,244,.6)",marginBottom:22}}>ÁUREA</div>
+        <h1 style={{color:"white",fontSize:36,lineHeight:1.2,marginBottom:18,fontWeight:300,fontFamily:"var(--serif)"}}>
           Seu look resolvido,<br/><em>simples assim.</em>
         </h1>
-        <p style={{color:"rgba(250,248,244,.8)",fontSize:15,fontWeight:300,lineHeight:1.65,marginBottom:32}}>
-          A Áurea entende seu momento e sugere combinações que realmente funcionam pra você.
+        <p style={{color:"rgba(250,248,244,.78)",fontSize:14,fontWeight:300,lineHeight:1.7,marginBottom:36}}>
+          A Áurea sugere combinações inteligentes com o que você já tem — e com o que realmente vale a pena acrescentar.
         </p>
         <button className="bp" onClick={()=>go(3)}
           style={{background:"rgba(250,248,244,.95)",color:"var(--ink)"}}>
           Continuar
         </button>
       </div>
-      <button className="back" onClick={goBack} style={{top:56}}><ArrowLeft size={16}/></button>
+      <button className="back" onClick={goBack} style={{top:56,color:"white",background:"rgba(255,255,255,.15)"}}><ArrowLeft size={16}/></button>
     </div>,
 
-    // 2 — Onboard 3
-    <div key="2" className="scroll-pb">
-            <img src={IMGS.onboard3} className="img-half" alt="" style={{objectPosition:"center center"}} />
-      <div className="pad" style={{paddingTop:26}}>
-        <div className="logo" style={{marginBottom:18}}>ÁUREA</div>
-        <h1 style={{marginBottom:16}}>Você já tem<br/><em>muita coisa boa.</em></h1>
-        <p style={{marginBottom:24,fontSize:15,lineHeight:1.65}}>A Áurea organiza ideias, entende seu estilo e facilita suas escolhas do dia a dia.</p>
-        {[
-          "Looks mais inteligentes",
-          "Combinações que funcionam",
-          "Menos tempo pensando no que vestir",
-        ].map(t=>(
-          <div key={t} style={{display:"flex",alignItems:"center",gap:8,fontSize:14,fontWeight:300,color:"#5a5046",lineHeight:2.1}}>
-            <Check size={13} color="var(--caramel)"/>{t}
-          </div>
-        ))}
-        <div style={{height:26}}/>
-        <button className="bp" onClick={()=>go(3)}>Montar meu look</button>
+    // 2 — Onboard 3 — O VALOR DO CLOSET
+    <div key="2" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",background:"var(--cream)"}}>
+      <img src={IMGS.onboard3} alt="" style={{width:"100%",height:"42vh",objectFit:"cover",objectPosition:"center center",display:"block",flexShrink:0}}/>
+      <div style={{flex:1,display:"flex",flexDirection:"column",padding:"32px 28px 0"}}>
+        <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:22}}>ÁUREA</div>
+        <h1 style={{fontFamily:"var(--serif)",fontSize:30,lineHeight:1.25,fontWeight:300,color:"var(--ink)",marginBottom:16}}>Você já tem<br/><em>muita coisa boa.</em></h1>
+        <p style={{fontSize:14,fontWeight:300,color:"#5a5046",lineHeight:1.7,marginBottom:24}}>A Áurea organiza ideias, conecta peças e transforma seu closet em possibilidades reais.</p>
+        <div style={{display:"flex",flexDirection:"column",gap:12,marginBottom:8}}>
+          {[
+            "Combinações que fazem sentido pra você",
+            "Mais possibilidades com o que você já tem",
+            "Menos tempo decidindo o que vestir",
+          ].map(t=>(
+            <div key={t} style={{display:"flex",alignItems:"center",gap:10,fontSize:13,fontWeight:300,color:"#5a5046",lineHeight:1.5}}>
+              <div style={{width:18,height:18,borderRadius:"50%",background:"var(--linen)",border:"1px solid var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+                <Check size={10} color="var(--caramel)" strokeWidth={2.5}/>
+              </div>
+              {t}
+            </div>
+          ))}
+        </div>
       </div>
+      <div style={{padding:"28px 28px 48px"}}><button className="bp" onClick={()=>go(3)}>Quero começar</button></div>
       <button className="back" onClick={goBack}><ArrowLeft size={16}/></button>
     </div>,
 
     // 3 — Nome (onboarding natural, sem "cadastro")
-    <div key="3">
-      <div style={{display:"flex",alignItems:"center",padding:"14px 20px 0",gap:8}}>
-        <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
-        <div style={{flex:1,textAlign:"center"}}><div className="logo">ÁUREA</div></div>
-        <div style={{width:36}}/>
+    <div key="3" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",background:"var(--cream)"}}>
+      {/* Imagem elegante no topo */}
+      <div style={{position:"relative",height:"35vh",flexShrink:0,overflow:"hidden"}}>
+        <img src="https://res.cloudinary.com/dxbapgxie/image/upload/v1778274730/IMG_6448_lrcdht.png" alt=""
+          style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 20%"}}/>
+        <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 60%,var(--cream) 100%)"}}/>
+        <button className="topbar-back" onClick={goBack} style={{position:"absolute",top:56,left:20,zIndex:3}}><ArrowLeft size={16}/></button>
       </div>
-      <div className="pad" style={{paddingTop:22}}>
-        <div className="eyebrow">Antes de começar</div>
-        <h2>Como posso te chamar?</h2>
-        <p style={{marginBottom:28}}>Aqui a gente quer te conhecer cada dia melhor.</p>
+      {/* Conteúdo */}
+      <div style={{flex:1,display:"flex",flexDirection:"column",padding:"8px 28px 0"}}>
+        <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:20}}>ÁUREA</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:26,fontWeight:300,lineHeight:1.3,color:"var(--ink)",marginBottom:12}}>Como a Áurea pode te chamar?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",lineHeight:1.65,marginBottom:32}}>Quero deixar suas sugestões cada vez mais com a sua cara.</p>
         <input className="field" placeholder="Seu nome" value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>e.key==="Enter"&&go(4)} autoCapitalize="words"/>
       </div>
-      <div className="spacer"/>
-      <div className="pad" style={{paddingTop:0}}>
-        <div className="stack">
-          <button className="bp" onClick={()=>{setHasOnboarded(true);go(4);}}>Continuar</button>
-          <button className="bg" onClick={()=>{setName("");setHasOnboarded(true);go(4);}}>Pular</button>
-        </div>
+      <div style={{padding:"20px 28px 48px"}}>
+        <button className="bp" style={{marginBottom:12}} onClick={()=>{setHasOnboarded(true);go(4);}}>Continuar</button>
+        <button className="bg" onClick={()=>{setName("");setHasOnboarded(true);go(4);}}>Pular</button>
       </div>
     </div>,
 
     // 4 — Momento (sem "Evento")
-    <div key="4" className="scroll-pb">
+    <div key="4" className="scroll-pb" style={{background:"var(--cream)"}}>
       <div className="topbar">
         <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
         <div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div>
@@ -864,45 +889,51 @@ export default function Aurea() {
       </div>
       <div className="prog"><div className="prog-f" style={{width:"25%"}}/></div>
       <div className="pad" style={{paddingTop:22}}>
-        <div className="eyebrow">Passo 1</div>
-        <h2 style={{marginBottom:20}}>Pra onde você vai{name.trim()?`, ${dn}`:""}?</h2>
-        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:20,lineHeight:1.5}}>Escolha o momento e a Áurea monta uma proposta para você.</p>
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:10}}>Seu momento</div>
+        <h2 style={{marginBottom:8,fontSize:24,fontFamily:"var(--serif)",fontWeight:300}}>Pra onde você vai hoje{name.trim()?`, ${dn}`:""}?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:24,lineHeight:1.6}}>A Áurea entende a ocasião e resolve o look pra você.</p>
 
-        <div style={{fontSize:10,fontWeight:500,letterSpacing:".14em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Principais</div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:24}}>
+        {/* Cards principais — imagem quase todo o card */}
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:28}}>
           {MOMENTS.filter(m=>m.main).map(m=>(
             <div key={m.id} onClick={()=>setMoment(m.id)}
-              style={{borderRadius:16,overflow:"hidden",cursor:"pointer",position:"relative",
+              style={{borderRadius:18,overflow:"hidden",cursor:"pointer",position:"relative",
                 border:`2px solid ${moment===m.id?"var(--caramel)":"transparent"}`,
-                boxShadow:moment===m.id?"0 4px 20px rgba(184,149,106,.28)":"0 2px 10px rgba(0,0,0,.07)",
-                transition:"all .2s",WebkitTapHighlightColor:"transparent"}}>
-              <div style={{position:"relative",height:200,background:m.grad}}>
-                <img src={IMGS[m.id]} alt={m.title} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center",display:"block"}} onError={e=>{e.target.style.display="none";}}/>
-                {moment===m.id&&<div style={{position:"absolute",inset:0,background:"rgba(184,149,106,.15)",display:"flex",alignItems:"center",justifyContent:"center"}}><div style={{width:26,height:26,borderRadius:"50%",background:"var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center",color:"white"}}><Check size={13} strokeWidth={2.5}/></div></div>}
+                boxShadow:moment===m.id?"0 6px 24px rgba(184,149,106,.32)":"0 2px 12px rgba(0,0,0,.08)",
+                transition:"all .22s",WebkitTapHighlightColor:"transparent",aspectRatio:"3/4"}}>
+              {/* Imagem */}
+              <img src={IMGS[m.id]} alt={m.title}
+                style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center"}}
+                onError={e=>{e.target.style.background=m.grad;e.target.style.display="none";}}/>
+              {/* Overlay gradiente */}
+              <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 40%,rgba(20,16,12,.72) 80%,rgba(20,16,12,.88) 100%)"}}/>
+              {/* Nome */}
+              <div style={{position:"absolute",bottom:0,left:0,right:0,padding:"12px 14px 14px"}}>
+                <div style={{fontFamily:"var(--serif)",fontSize:17,fontWeight:300,color:"white",lineHeight:1.2}}>{m.title}</div>
               </div>
-              <div style={{padding:"10px 12px 12px",background:"var(--cream)"}}>
-                <div style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:400,color:"var(--ink)"}}>{m.title}</div>
-              </div>
+              {/* Check selecionado */}
+              {moment===m.id&&<div style={{position:"absolute",top:10,right:10,width:24,height:24,borderRadius:"50%",background:"var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center"}}><Check size={12} strokeWidth={2.5} color="white"/></div>}
             </div>
           ))}
         </div>
 
-        <div style={{fontSize:10,fontWeight:500,letterSpacing:".14em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Outros momentos</div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:8}}>
+        {/* Separador */}
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:14}}>Outros momentos</div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:8}}>
           {MOMENTS.filter(m=>!m.main).map(m=>(
             <div key={m.id} onClick={()=>setMoment(m.id)}
               style={{borderRadius:16,overflow:"hidden",cursor:"pointer",position:"relative",
                 border:`2px solid ${moment===m.id?"var(--caramel)":"transparent"}`,
-                boxShadow:moment===m.id?"0 4px 20px rgba(184,149,106,.28)":"0 2px 10px rgba(0,0,0,.07)",
-                transition:"all .2s",WebkitTapHighlightColor:"transparent"}}>
-              <div style={{position:"relative",height:140,background:m.grad}}>
-                <img src={IMGS[m.id]} alt={m.title} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center",display:"block"}} onError={e=>{e.target.style.display="none";}}/>
-                <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 20%,rgba(28,23,20,.75) 100%)",padding:"10px 12px",display:"flex",flexDirection:"column",justifyContent:"flex-end"}}>
-                  <div style={{fontFamily:"var(--serif)",fontSize:15,fontWeight:400,color:"white",marginBottom:2}}>{m.title}</div>
-                  <div style={{fontSize:11,fontWeight:300,color:"rgba(255,255,255,.75)"}}>{m.sub}</div>
-                </div>
-                {moment===m.id&&<div style={{position:"absolute",top:8,left:8,width:20,height:20,borderRadius:"50%",background:"var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center",color:"white"}}><Check size={10} strokeWidth={2.5}/></div>}
+                boxShadow:moment===m.id?"0 4px 20px rgba(184,149,106,.28)":"0 2px 10px rgba(0,0,0,.06)",
+                transition:"all .22s",WebkitTapHighlightColor:"transparent",aspectRatio:"1/1"}}>
+              <img src={IMGS[m.id]} alt={m.title}
+                style={{position:"absolute",inset:0,width:"100%",height:"100%",objectFit:"cover",objectPosition:"top center"}}
+                onError={e=>{e.target.style.display="none";}}/>
+              <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,transparent 30%,rgba(20,16,12,.78) 100%)"}}/>
+              <div style={{position:"absolute",bottom:0,left:0,right:0,padding:"10px 12px 12px"}}>
+                <div style={{fontFamily:"var(--serif)",fontSize:15,fontWeight:300,color:"white"}}>{m.title}</div>
               </div>
+              {moment===m.id&&<div style={{position:"absolute",top:8,right:8,width:20,height:20,borderRadius:"50%",background:"var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center"}}><Check size={10} strokeWidth={2.5} color="white"/></div>}
             </div>
           ))}
         </div>
@@ -997,76 +1028,159 @@ export default function Aurea() {
       </div>
     </div>,
 
-    // 7 — Clima
-    <div key="7">
+    // 7 — Clima contextualizado
+    <div key="7" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",background:"var(--cream)"}}>
       <div className="topbar">
         <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
         <div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div>
         <span className="step-n">Clima</span>
       </div>
       <div className="prog"><div className="prog-f" style={{width:"85%"}}/></div>
-      <div className="pad" style={{paddingTop:22}}>
-        <div className="eyebrow">Clima em {cs}</div>
-        <h2>{isViagem?`Assim vai estar em ${cs}`:`Seu dia em ${cs}`}</h2>
-        <div className="wcard" style={{marginTop:10,marginBottom:20}}>
-          <WeatherIcon condition="sunny" size={110}/>
-          <div className="w-cond">Ensolarado</div>
-          <div className="w-temp">28°</div>
-          <p style={{marginTop:14,fontSize:14}}>Hoje está quente em {cs} — vou considerar isso no look.</p>
-        </div>
-        <div className="tags">
-          <span className="tag"><Sunrise size={11} color="var(--caramel)"/>Manhã quente</span>
-          <span className="tag"><Sun size={11} color="var(--caramel)"/>Tarde agradável</span>
-          <span className="tag"><Moon size={11} color="var(--caramel)"/>Noite amena</span>
-        </div>
+      {(()=>{
+        // Lógica de data
+        const isAmanha = dateMode==="amanha";
+        const isCustom = dateMode==="custom" && customDate;
+        const dataLabel = isAmanha ? "amanhã"
+          : isCustom ? `em ${formatDate(customDate).split(" de ")[0]} de ${formatDate(customDate).split(" de ")[1]}`
+          : "hoje";
+
+        // Lógica de horário por ocasião
+        const periodoMap = {
+          jantar:     {icone:"🌙", periodo:"noite",    desc:isAmanha?"A noite de amanhã vai estar mais fresca e agradável.":"A noite vai estar mais fresca e agradável."},
+          almoco:     {icone:"☀️", periodo:"meio-dia", desc:isAmanha?"Amanhã ao meio-dia vai estar bem quente.":isCustom?`Na data escolhida, o meio do dia vai estar quente.`:"Ao meio-dia vai estar bem quente."},
+          academia:   {icone:"🌤️", periodo:"dia todo", desc:isAmanha?"Amanhã vai estar quente durante todo o dia.":isCustom?"Na data escolhida o dia vai estar quente.":"O dia vai estar quente. Leve tecidos leves."},
+          trabalho:   {icone:"☀️", periodo:"dia",      desc:isAmanha?"Amanhã vai estar quente durante o dia.":isCustom?"Na data escolhida o dia vai estar ensolarado.":"O dia vai estar quente e ensolarado."},
+          fimdesemana:{icone:"🌤️", periodo:"tarde",    desc:isAmanha?"Amanhã vai estar agradável durante o dia.":isCustom?"Na data escolhida o dia vai estar bom.":"O dia vai estar agradável."},
+          emcasa:     {icone:"☀️", periodo:"dia",      desc:isAmanha?"Amanhã vai estar quente.":"O dia vai estar quente."},
+          viagem:     {icone:"🌤️", periodo:"variado",  desc:"Dias quentes com noites mais amenas. Considere camadas."},
+          dia:        {icone:"☀️", periodo:"dia",      desc:isAmanha?"Amanhã vai estar quente e seco.":"O dia vai estar quente e seco."},
+        };
+        const ctx = periodoMap[moment||"dia"] || periodoMap.dia;
+
+        // Frase contextualizada por data
+        const fraseClima = isAmanha
+          ? `${cs} amanhã: ${ctx.desc}`
+          : isCustom
+          ? `Na data escolhida em ${cs}: ${ctx.desc}`
+          : `${cs} hoje: ${ctx.desc}`;
+
+        return (
+          <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"28px 28px"}}>
+            {/* ÁUREA label */}
+            <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:24,textAlign:"center"}}>ÁUREA</div>
+
+            {/* Card clima compacto */}
+            <div style={{width:"100%",maxWidth:300,background:"var(--linen)",border:"1px solid var(--mist)",borderRadius:16,padding:"18px 22px",marginBottom:28}}>
+              {/* Linha principal */}
+              <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+                <span style={{fontSize:20,flexShrink:0}}>{ctx.icone}</span>
+                <div style={{flex:1}}>
+                  <div style={{fontFamily:"var(--serif)",fontSize:15,fontWeight:300,color:"var(--ink)"}}>
+                    {cs} · <span style={{fontSize:13,color:"#9a8878",fontWeight:300}}>{isAmanha?"amanhã":isCustom?dataLabel:"hoje"}</span>
+                  </div>
+                  <div style={{fontSize:12,fontWeight:300,color:"#9a8878",marginTop:2}}>28° · {ctx.periodo}</div>
+                </div>
+              </div>
+              <div style={{width:"100%",height:1,background:"var(--mist)",marginBottom:12}}/>
+              {/* Frase simples e direta */}
+              <div style={{fontSize:13,fontWeight:300,color:"#5a5046",lineHeight:1.6}}>
+                {fraseClima}
+              </div>
+            </div>
+
+            {/* Loading */}
+            <div style={{textAlign:"center"}}>
+              <div style={{fontSize:10,fontWeight:500,color:"var(--caramel)",letterSpacing:".16em",textTransform:"uppercase",marginBottom:12}}>Montando seu look</div>
+              <div style={{display:"flex",gap:5,justifyContent:"center"}}>
+                {[0,1,2].map(i=>(
+                  <div key={i} style={{width:4,height:4,borderRadius:"50%",background:"var(--caramel)",opacity:.3+i*.25}}/>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+      <div style={{padding:"0 28px 48px"}}>
+        <button className="bp" onClick={()=>moment==="jantar"?go(22):go(8)}>Continuar →</button>
       </div>
-      <div className="spacer"/>
-      <div style={{padding:"0 28px 48px"}}><button className="bp" onClick={()=>go(8)}>Entendi</button></div>
     </div>,
 
-    // 8 — Subtipo da ocasião
-    <div key="8" className="scroll-pb">
+    // 8 — Intensidade do look (slider)
+    <div key="8" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",background:"var(--cream)"}}>
+      <div className="topbar">
+        <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
+        <div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div>
+        <span className="step-n">4 de 4</span>
+      </div>
+      <div className="prog"><div className="prog-f" style={{width:"100%"}}/></div>
       {(()=>{
-        const occ=moment==="viagem"?"viagem_look":(moment||"dia");
-        const st=OCCASION_SUBTYPES[occ]||OCCASION_SUBTYPES.dia;
+        const niveis = [
+          {id:"leve",      emoji:"🌿", label:"Leve",       desc:"Natural, confortável e descomplicado"},
+          {id:"equilibrado",emoji:"✨",label:"Equilibrado", desc:"Casual chic e bem resolvido"},
+          {id:"presenca",  emoji:"🔥", label:"Presença",    desc:"Mais impacto, styling e informação de moda"},
+        ];
+        const atual = niveis[lookIntensity];
+
+        // Exemplo contextualizado por ocasião + intensidade
+        const exemploMap = {
+          jantar:      ["Leve e chic para a noite","Elegante na medida certa","Look marcante e sofisticado"],
+          almoco:      ["Leve e feminino","Bem arrumada sem esforço","Fashion e com presença"],
+          trabalho:    ["Confortável e alinhada","Profissional e elegante","Impacto total no trabalho"],
+          fimdesemana: ["Relaxada e bonita","Casual chic para o passeio","Estilosa e atual"],
+          academia:    ["Clean e funcional","Esportivo e alinhado","Fashion fitness"],
+          emcasa:      ["Conforto total","Arrumada e relaxada","Cozy chic sofisticado"],
+          dia:         ["Effortless e prático","Chic no dia a dia","Produzida e com estilo"],
+          viagem_look: ["Leve para viajar","Confortável e alinhada","Sofisticada em trânsito"],
+        };
+        const exemplos = exemploMap[moment||"dia"] || exemploMap.dia;
+
         return (
-          <>
-            <div className="topbar">
-              <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
-              <div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div>
-              <span className="step-n">4 de 4</span>
+          <div style={{flex:1,display:"flex",flexDirection:"column",padding:"28px 28px 0"}}>
+            <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:16}}>Intensidade do look</div>
+            <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,color:"var(--ink)",marginBottom:8}}>Qual é a intensidade do look hoje?</h2>
+            <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:36,lineHeight:1.65}}>A Áurea ajusta o styling ao seu momento, do mais leve ao mais marcante.</p>
+
+            {/* Preview do nível atual */}
+            <div style={{textAlign:"center",marginBottom:36}}>
+              <div style={{fontSize:40,marginBottom:12,transition:"all .3s"}}>{atual.emoji}</div>
+              <div style={{fontFamily:"var(--serif)",fontSize:26,fontWeight:300,color:"var(--ink)",marginBottom:6,transition:"all .3s"}}>{atual.label}</div>
+              <div style={{fontSize:13,fontWeight:300,color:"#9a8878",lineHeight:1.5,marginBottom:12}}>{atual.desc}</div>
+              <div style={{display:"inline-block",padding:"6px 16px",borderRadius:20,background:"var(--linen)",border:"1px solid var(--mist)"}}>
+                <span style={{fontSize:12,fontWeight:300,color:"var(--caramel)",fontStyle:"italic"}}>{exemplos[lookIntensity]}</span>
+              </div>
             </div>
-            <div className="prog"><div className="prog-f" style={{width:"100%"}}/></div>
-            <div className="pad" style={{paddingTop:22}}>
-              <div className="eyebrow">Último passo</div>
-              <h2 style={{marginBottom:8}}>{st.q}</h2>
-              <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:24,lineHeight:1.5}}>Isso define o tom do look.</p>
-              <div style={{display:"flex",flexDirection:"column",gap:10}}>
-                {st.opts.map(f=>(
-                  <div key={f.id} onClick={()=>{setOccasionSubtype(f.id);setFeeling([f.label]);learnTone(f.id);}}
-                    style={{display:"flex",alignItems:"center",gap:14,padding:"16px 18px",borderRadius:"var(--rcard)",
-                      border:`2px solid ${occasionSubtype===f.id?"var(--caramel)":"var(--mist)"}`,
-                      background:occasionSubtype===f.id?"#FDF6EC":"var(--linen)",
-                      cursor:"pointer",transition:"all .2s",WebkitTapHighlightColor:"transparent",position:"relative"}}>
-                    <div style={{flex:1}}>
-                      <div style={{fontFamily:"var(--serif)",fontSize:17,fontWeight:400,color:"var(--ink)",marginBottom:3}}>{f.label}</div>
-                      <div style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.4}}>{f.sub}</div>
-                    </div>
-                    {occasionSubtype===f.id
-                      ?<div style={{width:22,height:22,borderRadius:"50%",background:"var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><Check size={12} color="white" strokeWidth={2.5}/></div>
-                      :<div style={{width:22,height:22,borderRadius:"50%",border:"1.5px solid var(--nude)",flexShrink:0}}/>
-                    }
+
+            {/* Slider */}
+            <div style={{padding:"0 8px",marginBottom:24}}>
+              <input type="range" min="0" max="2" step="1" value={lookIntensity}
+                onChange={e=>{
+                  const v=parseInt(e.target.value);
+                  setLookIntensity(v);
+                  setOccasionSubtype(niveis[v].id);
+                  setFeeling([niveis[v].label]);
+                  learnTone(niveis[v].id);
+                }}
+                style={{width:"100%",WebkitAppearance:"none",appearance:"none",height:3,borderRadius:2,
+                  background:`linear-gradient(to right, var(--caramel) ${lookIntensity*50}%, var(--mist) ${lookIntensity*50}%)`,
+                  outline:"none",cursor:"pointer"}}
+              />
+              {/* Labels */}
+              <div style={{display:"flex",justifyContent:"space-between",marginTop:10}}>
+                {niveis.map((n,i)=>(
+                  <div key={n.id} onClick={()=>{setLookIntensity(i);setOccasionSubtype(n.id);setFeeling([n.label]);learnTone(n.id);}}
+                    style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4,cursor:"pointer",opacity:lookIntensity===i?1:.45,transition:"opacity .2s"}}>
+                    <div style={{width:8,height:8,borderRadius:"50%",background:lookIntensity===i?"var(--caramel)":"var(--mist)",transition:"all .2s"}}/>
+                    <div style={{fontSize:11,fontWeight:lookIntensity===i?500:300,color:lookIntensity===i?"var(--caramel)":"#9a8878",letterSpacing:".04em"}}>{n.label}</div>
                   </div>
                 ))}
               </div>
-              {!occasionSubtype&&<div className="hint" style={{marginTop:16}}><span className="hd"/>Escolha uma opção para continuar</div>}
             </div>
-            <div style={{padding:"24px 28px 48px"}}>
-              <button className="bp" disabled={!occasionSubtype} onClick={()=>go(10)}>Ver meu look →</button>
-            </div>
-          </>
+          </div>
         );
       })()}
+      <div style={{padding:"16px 28px 48px"}}>
+        <button className="bp" onClick={()=>go(23)}>Ver meu look →</button>
+      </div>
     </div>,
 
     // 9 — slot vazio
@@ -1696,117 +1810,258 @@ export default function Aurea() {
       </div>
     </div>,
 
-    // 18 — Dia a dia subtype
-    <div key="18" className="scroll-pb">
-      <div className="topbar"><button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">1 de 5</span></div>
-      <div className="prog"><div className="prog-f" style={{width:"20%"}}/></div>
-      <div className="pad" style={{paddingTop:22}}>
-        <div className="eyebrow">Dia a dia</div>
-        <h2>Como está seu dia hoje?</h2>
-        <p style={{marginBottom:24}}>Escolha a proposta que mais combina com seu momento.</p>
-        <div className="stack">
-          {[{id:"correria",Icon:Zap,title:"Correria do dia",desc:"Prática, confortável e pronta para tudo"},{id:"equilibrado",Icon:Compass,title:"Equilibrado",desc:"Arrumada na medida certa"},{id:"arrumado",Icon:Sparkles,title:"Mais produzido",desc:"Quando você quer se sentir ainda mais bonita"}].map(o=>(
-            <div key={o.id} className={`fc${diaSubtype===o.id?" on":""}`} onClick={()=>setDiaSubtype(o.id)}>
-              <div style={{display:"flex",gap:14,alignItems:"flex-start",flex:1}}>
-                <div style={{width:44,height:44,borderRadius:"50%",flexShrink:0,border:"1.5px solid var(--mist)",display:"flex",alignItems:"center",justifyContent:"center",background:"var(--cream)",color:"var(--caramel)"}}><o.Icon size={18} strokeWidth={1.5}/></div>
-                <div><span style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:500,color:"var(--ink)",display:"block",marginBottom:3}}>{o.title}</span><span style={{fontSize:13,fontWeight:400,color:"var(--caramel)",display:"block"}}>{o.desc}</span></div>
+    // 18 — Dia a dia: TELA 1 — MOOD DO DIA
+    <div key="18" className="scroll-pb" style={{background:"var(--cream)"}}>
+      <div className="topbar"><button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">1 de 2</span></div>
+      <div className="prog"><div className="prog-f" style={{width:"50%"}}/></div>
+      <div className="pad" style={{paddingTop:28}}>
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Dia a dia</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,marginBottom:8}}>Como está seu dia hoje?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:28,lineHeight:1.65}}>A Áurea adapta o look ao ritmo do seu momento.</p>
+        <div style={{display:"flex",flexDirection:"column",gap:12}}>
+          {[
+            {id:"correria", title:"Leve e prática",       desc:"Para um dia corrido, mas ainda bem vestida"},
+            {id:"equilibrado",title:"Naturalmente elegante",desc:"Tudo parece simples, mas funciona"},
+            {id:"arrumado", title:"Mais presença",         desc:"Quando você quer um look que chama mais atenção"},
+          ].map(o=>(
+            <div key={o.id} onClick={()=>setDiaSubtype(o.id)}
+              style={{padding:"16px 18px",borderRadius:"var(--rcard)",cursor:"pointer",
+                background:diaSubtype===o.id?"var(--linen)":"white",
+                border:`1.5px solid ${diaSubtype===o.id?"var(--caramel)":"var(--mist)"}`,
+                boxShadow:diaSubtype===o.id?"0 4px 16px rgba(184,149,106,.18)":"none",
+                transition:"all .2s",WebkitTapHighlightColor:"transparent",
+                display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+              <div>
+                <div style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:400,color:"var(--ink)",marginBottom:4}}>{o.title}</div>
+                <div style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.5}}>{o.desc}</div>
               </div>
-              {diaSubtype===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0,marginLeft:8}}/>}
+              {diaSubtype===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0,marginLeft:12}}/>}
             </div>
           ))}
         </div>
-        {!diaSubtype&&<div className="hint" style={{marginTop:14}}><span className="hd"/>Escolha uma opção para continuar</div>}
       </div>
-      <div style={{padding:"16px 28px 48px"}}><button className="bp" disabled={!diaSubtype} onClick={()=>{if(savedCity){setCityInput(savedCity);setCityOk(true);go(6);}else go(5);}}>Continuar</button></div>
+      <div style={{padding:"24px 28px 48px"}}>
+        <button className="bp" disabled={!diaSubtype} onClick={()=>go(19)}>Continuar</button>
+      </div>
     </div>,
 
-    // 19 — Elevar look
-    <div key="19" className="scroll-pb">
-      <div style={{display:"flex",alignItems:"center",padding:"14px 20px 0",gap:8}}><button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button><div style={{flex:1,textAlign:"center"}}><div className="logo">ÁUREA</div></div><div style={{width:36}}/></div>
-      <div className="pad" style={{paddingTop:18}}>
-        <div className="eyebrow">Para elevar ainda mais</div>
-        <h2 style={{marginBottom:6}}>Acessórios e detalhes</h2>
-        <p style={{marginBottom:24,fontSize:13,color:"#9a8878"}}>Pequenos detalhes que transformam qualquer look.</p>
-        <div className="stack">
-          {[{title:"Brinco fino",Icon:Sparkles,hint:"Argola dourada ou pérola — eleva qualquer look",price:"R$ 45–120"},{title:"Cinto nude",Icon:Shirt,hint:"Estrutura o look e define a silhueta com elegância",price:"R$ 60–180"},{title:"Bolsa de palha",Icon:ShoppingBag,hint:"Traz leveza e textura ao look sem esforço",price:"R$ 80–250"},{title:"Óculos de sol",Icon:Eye,hint:"O acabamento perfeito para qualquer saída",price:"R$ 90–300"}].map((item,i)=>(
-            <div key={i} style={{background:"var(--linen)",border:"1.5px solid var(--mist)",borderRadius:"var(--rcard)",overflow:"hidden"}}>
-              <div style={{padding:"14px 16px 10px",borderBottom:"1px solid var(--mist)"}}>
-                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:4}}>
-                  <item.Icon size={20} color="var(--caramel)" strokeWidth={1.5}/>
-                  <div><div style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:400,color:"var(--ink)"}}>{item.title}</div><div style={{fontSize:12,fontWeight:500,color:"var(--caramel)",marginTop:2}}>{item.price}</div></div>
-                </div>
-                <div style={{fontSize:11,fontWeight:300,color:"#b5a898",paddingLeft:30}}>{item.hint}</div>
+    // 19 — Dia a dia: TELA 2 — ONDE E QUANDO (unificada)
+    <div key="19" className="scroll-pb" style={{background:"var(--cream)"}}>
+      <div className="topbar"><button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">2 de 2</span></div>
+      <div className="prog"><div className="prog-f" style={{width:"100%"}}/></div>
+      <div className="pad" style={{paddingTop:28}}>
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Dia a dia</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,marginBottom:8}}>Onde e quando?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:32,lineHeight:1.65}}>A Áurea usa isso para adaptar o look ao clima e ao momento.</p>
+
+        {/* Cidade */}
+        <div style={{marginBottom:28}}>
+          <div style={{fontSize:11,fontWeight:500,letterSpacing:".12em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:10}}>Cidade</div>
+          {savedCity && !cityInput ? (
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 18px",background:"var(--linen)",border:"1.5px solid var(--caramel)",borderRadius:"var(--rcard)"}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <MapPin size={14} color="var(--caramel)"/>
+                <span style={{fontFamily:"var(--serif)",fontSize:16,color:"var(--ink)"}}>{savedCity}</span>
               </div>
-              <div style={{display:"flex"}}>
-                <button style={{flex:1,padding:"12px 8px",background:"transparent",border:"none",borderRight:"1px solid var(--mist)",fontSize:12,fontWeight:400,color:"var(--caramel)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,WebkitTapHighlightColor:"transparent"}}
-                  onClick={()=>{setOwnedItems(p=>p.includes(item.title)?p.filter(x=>x!==item.title):[...p,item.title]);if(!ownedItems.includes(item.title))showToast("Perfeito — já entendi seu estilo");}}>
-                  {ownedItems.includes(item.title)?<Check size={13}/>:<Plus size={13}/>}
-                  {ownedItems.includes(item.title)?"Tenho!":"Tenho similar"}
-                </button>
-                <button style={{flex:1,padding:"12px 8px",background:"transparent",border:"none",fontSize:12,fontWeight:400,color:"var(--ink)",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:6,WebkitTapHighlightColor:"transparent"}}
-                  onClick={()=>showToast("Buscando "+item.title)}>
-                  <Search size={13}/> Buscar
-                </button>
-              </div>
+              <button onClick={()=>{setSavedCity("");setCityInput("");setCityOk(false);}} style={{fontSize:11,fontWeight:400,color:"#9a8878",background:"none",border:"none",cursor:"pointer",textDecoration:"underline"}}>alterar</button>
             </div>
-          ))}
+          ) : (
+            <div className="ac">
+              <input className={`field${cityErr?" err":""}`} placeholder="Digite sua cidade" value={cityInput} onChange={e=>onCityType(e.target.value)} autoComplete="off" autoCapitalize="words"/>
+              {(citySuggs.length>0||(cityInput.length>=2&&!cityOk))&&(
+                <div className="ac-list">
+                  {citySuggs.map(c=>(<div key={c} className="ac-item" onClick={()=>pickCity(c)}>{c}</div>))}
+                  {cityInput.length>=2&&(<div className="ac-free" onClick={useFreeCity}><MapPin size={13}/><span>Usar "<strong>{cityInput}</strong>"</span></div>)}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Data */}
+        <div style={{marginBottom:8}}>
+          <div style={{fontSize:11,fontWeight:500,letterSpacing:".12em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:10}}>Data</div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
+            {[
+              {id:"hoje",    label:"Hoje",    sub:new Date().toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})},
+              {id:"amanha",  label:"Amanhã",  sub:new Date(Date.now()+86400000).toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})},
+              {id:"outra",   label:"Outra",   sub:"data"},
+            ].map(d=>(
+              <div key={d.id} onClick={()=>setDateChoice(d.id)}
+                style={{padding:"12px 8px",borderRadius:"var(--rcard)",cursor:"pointer",textAlign:"center",
+                  background:dateChoice===d.id?"var(--linen)":"white",
+                  border:`1.5px solid ${dateChoice===d.id?"var(--caramel)":"var(--mist)"}`,
+                  transition:"all .18s",WebkitTapHighlightColor:"transparent"}}>
+                <div style={{fontFamily:"var(--serif)",fontSize:15,fontWeight:400,color:"var(--ink)",marginBottom:2}}>{d.label}</div>
+                <div style={{fontSize:11,fontWeight:300,color:"#9a8878"}}>{d.sub}</div>
+              </div>
+            ))}
+          </div>
+          {dateChoice==="outra"&&(
+            <input type="date" className="field" style={{marginTop:12}}
+              value={customDate} onChange={e=>setCustomDate(e.target.value)}/>
+          )}
         </div>
       </div>
-      <div style={{padding:"16px 28px 48px"}}><button className="bs" onClick={()=>go(10)}>Voltar</button></div>
+      <div style={{padding:"24px 28px 48px"}}>
+        <button className="bp" disabled={!(cityOk||savedCity)&&!cityInput||!dateChoice}
+          onClick={()=>{
+            if(cityInput&&!cityOk){setSavedCity(cityInput);setCityOk(true);}
+            go(10);
+          }}>Ver meu look →</button>
+      </div>
     </div>,
 
     // 20, 21 — slots
     <div key="20" style={{display:"none"}}/>,
     <div key="21" style={{display:"none"}}/>,
 
-    // 22–24 — slots (evento removido)
-    <div key="22" style={{display:"none"}}/>,
-    <div key="23" style={{display:"none"}}/>,
-    <div key="24" style={{display:"none"}}/>,
-
-    // 25 — Travel style (só acessível via Mala inteligente, depois da tela 31)
-    <div key="25">
-      <div className="topbar"><button className="topbar-back" onClick={()=>go(31)}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">Mala · 2 de 4</span></div>
-      <div className="prog"><div className="prog-f" style={{width:"50%"}}/></div>
+    // 22 — Contexto social do jantar
+    <div key="22" className="scroll-pb" style={{background:"var(--cream)"}}>
+      <div className="topbar">
+        <button className="topbar-back" onClick={goBack}><ArrowLeft size={16}/></button>
+        <div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div>
+        <span className="step-n">3 de 4</span>
+      </div>
+      <div className="prog"><div className="prog-f" style={{width:"75%"}}/></div>
       <div className="pad" style={{paddingTop:28}}>
-        <div className="eyebrow" style={{marginBottom:8}}>Mala inteligente</div>
-        <h2 style={{marginBottom:8}}>Como você quer viver essa viagem?</h2>
-        <p style={{marginBottom:28,fontSize:14,color:"#9a8878"}}>Isso define o ritmo dos looks que vou montar pra você.</p>
-        <div className="stack">
-          {[{id:"explorar",Icon:Compass,title:"Explorar e conhecer",desc:"Confortável, versátil e pronto para qualquer programa"},{id:"descansar",Icon:Home,title:"Descansar e relaxar",desc:"Leve, solto, bonito sem esforço"},{id:"trabalho",Icon:Briefcase,title:"Trabalho com estilo",desc:"Presença garantida — reuniões sem abrir mão do look"},{id:"mix",Icon:Layers,title:"Um pouco de tudo",desc:"Looks versáteis que funcionam em vários contextos"}].map(o=>(
-            <div key={o.id} className={`fc${travelStyle===o.id?" on":""}`} style={{cursor:"pointer",padding:"16px 18px"}} onClick={()=>setTravelStyle(o.id)}>
-              <div style={{display:"flex",gap:14,alignItems:"center",flex:1}}><o.Icon size={22} color="var(--caramel)" strokeWidth={1.5} style={{flexShrink:0}}/><div><span style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:500,color:"var(--ink)",display:"block",marginBottom:3}}>{o.title}</span><span style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.5}}>{o.desc}</span></div></div>
-              {travelStyle===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0,marginLeft:8}}/>}
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Jantar</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,marginBottom:8}}>Qual é o clima desse jantar?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:28,lineHeight:1.65}}>O contexto muda tudo — da elegância ao styling.</p>
+        <div style={{display:"flex",flexDirection:"column",gap:12}}>
+          {[
+            {id:"romantico",   emoji:"🍷", title:"Romântico",      desc:"Mais elegante e feminino"},
+            {id:"amigas",      emoji:"🥂", title:"Com amigas",     desc:"Atual, leve e estilosa"},
+            {id:"trabalho",    emoji:"💼", title:"Trabalho",        desc:"Alinhada e sofisticada"},
+            {id:"comemoracao", emoji:"✨", title:"Comemoração",     desc:"Mais presença e impacto"},
+            {id:"casual",      emoji:"🍝", title:"Casual",          desc:"Bonita sem esforço"},
+          ].map(o=>(
+            <div key={o.id} onClick={()=>setJantarContext(o.id)}
+              style={{padding:"14px 18px",borderRadius:"var(--rcard)",cursor:"pointer",
+                background:jantarContext===o.id?"var(--linen)":"white",
+                border:`1.5px solid ${jantarContext===o.id?"var(--caramel)":"var(--mist)"}`,
+                boxShadow:jantarContext===o.id?"0 4px 16px rgba(184,149,106,.18)":"none",
+                transition:"all .2s",WebkitTapHighlightColor:"transparent",
+                display:"flex",alignItems:"center",gap:14}}>
+              <span style={{fontSize:20,flexShrink:0}}>{o.emoji}</span>
+              <div style={{flex:1}}>
+                <div style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:400,color:"var(--ink)",marginBottom:3}}>{o.title}</div>
+                <div style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.5}}>{o.desc}</div>
+              </div>
+              {jantarContext===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0}}/>}
             </div>
           ))}
         </div>
       </div>
-      <div style={{padding:"20px 28px 48px"}}><div className="stack"><button className="bp" disabled={!travelStyle} onClick={()=>go(26)}>Continuar</button><button className="bg" onClick={()=>{setTravelStyle("mix");go(26);}}>Pular</button></div></div>
+      <div style={{padding:"20px 28px 48px"}}>
+        <button className="bp" disabled={!jantarContext} onClick={()=>go(8)}>Continuar</button>
+      </div>
+    </div>,
+    // 23 — Tela de transição elegante antes do look
+    <div key="23" style={{minHeight:"100dvh",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:"var(--cream)",padding:"40px 28px"}}>
+      <div style={{textAlign:"center",maxWidth:280}}>
+        <div style={{fontFamily:"var(--serif)",fontSize:10,fontWeight:400,letterSpacing:".28em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:32}}>ÁUREA</div>
+        <div style={{width:48,height:48,borderRadius:"50%",border:"1.5px solid var(--caramel)",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 28px",opacity:.7}}>
+          <Sparkles size={18} color="var(--caramel)" strokeWidth={1.5}/>
+        </div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:26,fontWeight:300,color:"var(--ink)",lineHeight:1.3,marginBottom:12}}>
+          {moment==="jantar"?"Montando o look da noite"
+          :moment==="almoco"?"Montando o look do almoço"
+          :moment==="trabalho"?"Montando o look de trabalho"
+          :moment==="fimdesemana"?"Montando o look do fim de semana"
+          :moment==="academia"?"Montando o look do treino"
+          :moment==="emcasa"?"Montando o look de casa"
+          :"Montando seu look"}
+        </h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",lineHeight:1.65,marginBottom:40}}>
+          {moment==="jantar"&&jantarContext==="romantico"?"Pensando em algo elegante e feminino para a noite…"
+          :moment==="jantar"&&jantarContext==="amigas"?"Criando um look atual e estiloso…"
+          :moment==="jantar"&&jantarContext==="trabalho"?"Buscando o equilíbrio entre elegância e profissionalismo…"
+          :moment==="almoco"?"Considerando o clima do meio-dia e a proposta do almoço…"
+          :moment==="academia"?"Ajustando o look para o ritmo do seu treino…"
+          :"A Áurea está considerando o clima, o momento e o seu estilo…"}
+        </p>
+        <div style={{display:"flex",gap:6,justifyContent:"center",marginBottom:48}}>
+          {[0,1,2,3].map(i=>(
+            <div key={i} style={{width:4,height:4,borderRadius:"50%",background:"var(--caramel)",opacity:.25+i*.2}}/>
+          ))}
+        </div>
+        <button className="bp" onClick={()=>go(10)} style={{width:"100%"}}>Ver o look →</button>
+      </div>
     </div>,
 
-    // 26 — Travel momentos
-    <div key="26" className="scroll-pb">
+    // 24 — slot
+    <div key="24" style={{display:"none"}}/>,
+
+    // 25 — Mala: como prefere montar (etapa 2 de 4)
+    <div key="25" className="scroll-pb" style={{background:"var(--cream)"}}>
+      <div className="topbar"><button className="topbar-back" onClick={()=>go(31)}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">Mala · 2 de 4</span></div>
+      <div className="prog"><div className="prog-f" style={{width:"50%"}}/></div>
+      <div className="pad" style={{paddingTop:28}}>
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Mala inteligente</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,marginBottom:8}}>Como você prefere montar sua mala?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:28,lineHeight:1.65}}>A Áurea organiza tudo com base no seu estilo.</p>
+        <div style={{display:"flex",flexDirection:"column",gap:12}}>
+          {[
+            {id:"enxuta",   title:"Mala inteligente enxuta",  desc:"Poucas peças, muitos looks"},
+            {id:"mix",      title:"Mala equilibrada",          desc:"Versátil para diferentes momentos"},
+            {id:"completa", title:"Mala completa",             desc:"Mais variedade para ocasiões específicas"},
+            {id:"aurea",    title:"Quero ajuda da Áurea",      desc:"A Áurea equilibra clima, programação e combinações automaticamente"},
+          ].map(o=>(
+            <div key={o.id} onClick={()=>setTravelStyle(o.id)}
+              style={{padding:"16px 18px",borderRadius:"var(--rcard)",cursor:"pointer",
+                background:travelStyle===o.id?"var(--linen)":"white",
+                border:`1.5px solid ${travelStyle===o.id?"var(--caramel)":"var(--mist)"}`,
+                boxShadow:travelStyle===o.id?"0 4px 16px rgba(184,149,106,.18)":"none",
+                transition:"all .2s",WebkitTapHighlightColor:"transparent",
+                display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+              <div>
+                <div style={{fontFamily:"var(--serif)",fontSize:16,fontWeight:400,color:"var(--ink)",marginBottom:4}}>{o.title}</div>
+                <div style={{fontSize:12,fontWeight:300,color:"#9a8878",lineHeight:1.5}}>{o.desc}</div>
+              </div>
+              {travelStyle===o.id&&<Check size={16} color="var(--caramel)" strokeWidth={2} style={{flexShrink:0,marginLeft:12}}/>}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{padding:"20px 28px 48px"}}><div style={{display:"flex",flexDirection:"column",gap:10}}><button className="bp" disabled={!travelStyle} onClick={()=>go(26)}>Continuar</button><button className="bg" onClick={()=>{setTravelStyle("mix");go(26);}}>Pular</button></div></div>
+    </div>,
+
+    // 26 — Travel momentos especiais
+    <div key="26" className="scroll-pb" style={{background:"var(--cream)"}}>
       <div className="topbar"><button className="topbar-back" onClick={()=>go(25)}><ArrowLeft size={16}/></button><div className="logo" style={{cursor:"pointer",flex:1,textAlign:"center"}} onClick={()=>{if(hasOnboarded){setTab("inicio");go(13);}}}>ÁUREA</div><span className="step-n">Mala · 3 de 4</span></div>
       <div className="prog"><div className="prog-f" style={{width:"75%"}}/></div>
       <div className="pad" style={{paddingTop:28}}>
-        <div className="eyebrow" style={{marginBottom:8}}>Mala inteligente</div>
-        <h2 style={{marginBottom:8}}>Tem algum momento especial na viagem?</h2>
-        <p style={{marginBottom:24,fontSize:14,color:"#9a8878"}}>Pode escolher mais de um.</p>
-        <div className="stack" style={{marginBottom:16}}>
-          {[{id:"jantar",Icon:Utensils,label:"Jantar especial"},{id:"festa",Icon:Sparkles,label:"Festa / evento"},{id:"praia",Icon:Sun,label:"Praia"},{id:"turismo",Icon:MapPin,label:"Passeios turísticos"},{id:"reuniao",Icon:Briefcase,label:"Reunião / trabalho"}].map(m=>(
-            <div key={m.id} style={{display:"flex",alignItems:"center",gap:14,padding:"14px 18px",borderRadius:"var(--rcard)",cursor:"pointer",border:`1.5px solid ${travelMoments.includes(m.id)?"var(--caramel)":"var(--mist)"}`,background:travelMoments.includes(m.id)?"#FDF6EC":"var(--linen)",transition:"all .2s",WebkitTapHighlightColor:"transparent"}} onClick={()=>setTravelMoments(p=>p.includes(m.id)?p.filter(x=>x!==m.id):[...p,m.id])}>
-              <m.Icon size={18} color={travelMoments.includes(m.id)?"var(--caramel)":"#9a8878"} strokeWidth={1.5} style={{flexShrink:0}}/>
-              <span style={{fontFamily:"var(--serif)",fontSize:15,fontWeight:400,color:"var(--ink)",flex:1}}>{m.label}</span>
-              <div style={{width:20,height:20,borderRadius:4,flexShrink:0,border:`1.5px solid ${travelMoments.includes(m.id)?"var(--caramel)":"var(--nude)"}`,background:travelMoments.includes(m.id)?"var(--caramel)":"transparent",display:"flex",alignItems:"center",justifyContent:"center",transition:"all .2s"}}>
-                {travelMoments.includes(m.id)&&<Check size={11} color="white" strokeWidth={2.5}/>}
-              </div>
+        <div style={{fontSize:10,fontWeight:500,letterSpacing:".22em",textTransform:"uppercase",color:"var(--caramel)",marginBottom:12}}>Mala inteligente</div>
+        <h2 style={{fontFamily:"var(--serif)",fontSize:24,fontWeight:300,lineHeight:1.3,marginBottom:8}}>Tem algum momento especial nessa viagem?</h2>
+        <p style={{fontSize:13,fontWeight:300,color:"#9a8878",marginBottom:24,lineHeight:1.65}}>Pode escolher mais de um.</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
+          {[
+            {id:"jantar",     Icon:Utensils,  label:"Jantar especial"},
+            {id:"praia",      Icon:Sun,       label:"Praia ou piscina"},
+            {id:"show",       Icon:Sparkles,  label:"Estádio ou show"},
+            {id:"turismo",    Icon:MapPin,    label:"Passeio longo"},
+            {id:"restaurante",Icon:Coffee,    label:"Restaurante elegante"},
+            {id:"reuniao",    Icon:Briefcase, label:"Trabalho ou reunião"},
+            {id:"criancas",   Icon:Home,      label:"Passeio com crianças"},
+            {id:"academia",   Icon:Dumbbell,  label:"Academia"},
+          ].map(m=>(
+            <div key={m.id}
+              style={{display:"flex",alignItems:"center",gap:10,padding:"12px 14px",borderRadius:"var(--rcard)",cursor:"pointer",
+                border:`1.5px solid ${travelMoments.includes(m.id)?"var(--caramel)":"var(--mist)"}`,
+                background:travelMoments.includes(m.id)?"var(--linen)":"white",
+                transition:"all .2s",WebkitTapHighlightColor:"transparent"}}
+              onClick={()=>setTravelMoments(p=>p.includes(m.id)?p.filter(x=>x!==m.id):[...p,m.id])}>
+              <m.Icon size={15} color={travelMoments.includes(m.id)?"var(--caramel)":"#b5a898"} strokeWidth={1.5} style={{flexShrink:0}}/>
+              <span style={{fontSize:13,fontWeight:300,color:"var(--ink)",flex:1,lineHeight:1.3}}>{m.label}</span>
+              {travelMoments.includes(m.id)&&<Check size={12} color="var(--caramel)" strokeWidth={2.5}/>}
             </div>
           ))}
         </div>
         <div style={{fontSize:11,fontWeight:500,color:"var(--caramel)",letterSpacing:".1em",textTransform:"uppercase",marginBottom:8}}>Outro momento</div>
         <input className="field" placeholder="Ex: casamento, spa day, show…" value={travelEventCustom} onChange={e=>setTravelEventCustom(e.target.value)}/>
       </div>
-      <div style={{padding:"16px 28px 48px"}}><div className="stack"><button className="bp" onClick={()=>go(27)}>Continuar</button><button className="bg" onClick={()=>go(27)}>Pular</button></div></div>
+      <div style={{padding:"16px 28px 48px"}}><div style={{display:"flex",flexDirection:"column",gap:10}}><button className="bp" onClick={()=>go(27)}>Continuar</button><button className="bg" onClick={()=>go(27)}>Pular</button></div></div>
     </div>,
 
     // 27 — Travel alerta
